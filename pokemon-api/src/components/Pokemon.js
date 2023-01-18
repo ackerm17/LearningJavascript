@@ -1,30 +1,44 @@
-import React, { useState } from  'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+
 
 const Pokemon = (props) => {
     const [pokelist, setPokelist] = useState([]);
+    const [boolean, setBoolean] = useState(false);
 
-    const makePokelist = (e) => {
-                fetch("https://pokeapi.co/api/v2/pokemon?limit=807&offset=0")
-                    .then(response => {
-                    // not the actual JSON response body but the entire HTTP response
-                    return response.json();
-                }).then(response => {
+    useEffect(() => {
+                axios.get("https://pokeapi.co/api/v2/pokemon?limit=807&offset=0")
+                .then(response => {
                     // we now run another promise to parse the HTTP response into usable JSON
                     console.log(response);
-                    setPokelist(response.results);
+                    setPokelist(response.data.results);
                 }).catch(err=>{
                     console.log(err);
                 });
+    },[])
+
+    const trulse = (e) => {
+        if(boolean == false){
+            setBoolean(true);
+        } else{
+            setBoolean(false);
+        }
     }
+
 
     return(
         <div>
-            <button onClick={() => makePokelist()}>Grab Pokemon</button>
-                {pokelist.map((item,key) => 
+                <button onClick={trulse}>Grab Pokemon</button>
+                {boolean?
+                <div>
+                {
+                pokelist.map((item,key) => 
                 <div key={key}>
                     <p>{item.name}</p>
                 </div>
-                )}
+                )}</div>
+                :""}
         </div>
     );
 
