@@ -30,7 +30,7 @@ const Pokemon = (props) => {
     return(
         <div>
                 <button onClick={trulse}>Grab Pokemon</button>
-                {boolean?
+                {boolean&&
                 <div>
                 {
                 pokelist.map((item,key) => 
@@ -38,7 +38,7 @@ const Pokemon = (props) => {
                     <p>{item.name}</p>
                 </div>
                 )}</div>
-                :""}
+                }
         </div>
     );
 
