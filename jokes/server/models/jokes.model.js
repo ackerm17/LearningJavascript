@@ -9,7 +9,7 @@ const JokeSchema = new mongoose.Schema(
         },
         punchline: {
             type: String,
-            required: [true, "punchline is required"]
+            required: [true, "punch is required"]
         }
     }
 );
