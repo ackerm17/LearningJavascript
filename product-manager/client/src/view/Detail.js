@@ -9,7 +9,7 @@ const Detail = (props) => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/products/' + id)
             .then(res => setProduct(res.data))
-            .catch(err => console.error(err));
+            .catch(err => console.log(err));
     }, [id]);
     
     return (
