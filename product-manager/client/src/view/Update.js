@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Update = (props) => {
+    const navigate = useNavigate();
     const {id} = useParams();
     const [Title, setTitle] = useState("");
     const [Price, setPrice] = useState();
@@ -22,7 +23,7 @@ const Update = (props) => {
         axios.put('http://localhost:8000/api/updateproduct/' + id, {
             Title,Price,Description
         })
-            .then(res=>console.log(res))
+            .then(res=>console.log(res), navigate('/'))
             .catch(err=>console.log(err))
     }
 
